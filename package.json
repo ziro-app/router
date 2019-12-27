@@ -1,0 +1,17 @@
+{
+  "name": "@ziro/router",
+  "version": "1.0.0",
+  "description": "Standard router implementation",
+  "main": "index.js"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ziro-app/router.git"
+  },
+  "keywords": [],
+  "author": "Vitor Barbosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ziro-app/router/issues"
+  },
+  "homepage": "https://github.com/ziro-app/router#readme"
+}

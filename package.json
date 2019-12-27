@@ -2,7 +2,7 @@
   "name": "@ziro/router",
   "version": "1.0.0",
   "description": "Standard router implementation",
-  "main": "index.js"
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ziro-app/router.git"

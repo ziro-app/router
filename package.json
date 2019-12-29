@@ -13,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/ziro-app/router/issues"
   },
-  "homepage": "https://github.com/ziro-app/router#readme"
+  "homepage": "https://github.com/ziro-app/router#readme",
+  "peerDependencies": {
+    "wouter": "^2.4.0"
+  }
 }

@@ -1,11 +1,20 @@
-const Router = (location, isLogged, publicRoutes, privateRoutes, notFound) => {
-	if(Object.keys(publicRoutes).some(route => route === location))
-		return publicRoutes[location]
-	if(Object.keys(privateRoutes).some(route => route === location)) {
-		if (isLogged) return privateRoutes[location]
-		else return publicRoutes['/login']
+const { useLocation } = require('wouter')
+
+const Router = (isLogged, publicRoutes, privateRoutes, homeRoute, NotFound) => {
+	const [location, setLocation] = useLocation()
+	if (location === '/') {
+		if (isLogged) setLocation(homeRoute)
+		setLocation('/login')
 	}
-	return notFound
+	if (Object.keys(publicRoutes).some(route => route === location)) {
+		if (isLogged) setLocation(homeRoute)
+		return publicRoutes[location]
+	}
+	if (Object.keys(privateRoutes).some(route => route === location)) {
+		if (isLogged) return privateRoutes[location]
+		return publicRoutes['/login'] // should call setLocation?
+	}
+	return NotFound
 }
 
 module.exports = Router

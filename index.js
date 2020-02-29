@@ -1,18 +1,18 @@
 const { useLocation } = require('wouter')
 
-const Router = (isLogged, publicRoutes, privateRoutes, homeRoute, NotFound) => {
+const Router = (isLogged, publicRoutes, privateRoutes, publicHomeRoute, privateHomeRoute, NotFound) => {
 	const [location, setLocation] = useLocation()
 	if (location === '/') {
-		if (isLogged) setLocation(homeRoute)
-		setLocation('/login')
+		if (isLogged) setLocation(privateHomeRoute)
+		setLocation(publicHomeRoute || '/login')
 	}
 	if (Object.keys(publicRoutes).some(route => route === location)) {
-		if (isLogged) setLocation(homeRoute)
+		if (isLogged) setLocation(privateHomeRoute)
 		return publicRoutes[location]
 	}
 	if (Object.keys(privateRoutes).some(route => route === location)) {
 		if (isLogged) return privateRoutes[location]
-		return publicRoutes['/login'] // should call setLocation?
+		return publicRoutes['/login'] // should it call setLocation? it would force url path to be /login
 	}
 	return NotFound
 }

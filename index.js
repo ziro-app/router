@@ -17,4 +17,18 @@ const Router = (isLogged, publicRoutes, privateRoutes, publicHomeRoute, privateH
 	return NotFound
 }
 
-module.exports = Router
+const Router2 = (isLogged, publicRoutes, privateRoutes, Login, NotFound) => {
+	const [location] = useLocation()
+	const isPrivateRoute = Object.keys(privateRoutes).some(route => route === location)
+	const isPublicRoute = Object.keys(publicRoutes).some(route => route === location)
+	if (isLogged && isPrivateRoute && !isPublicRoute) return privateRoutes[location]
+	if (isLogged && isPrivateRoute && isPublicRoute) return privateRoutes[location]
+	if (isLogged && !isPrivateRoute && isPublicRoute) return publicRoutes[location]
+	if (isLogged && !isPrivateRoute && !isPublicRoute) return NotFound
+	if (!isLogged && isPrivateRoute && !isPublicRoute) return Login
+	if (!isLogged && isPrivateRoute && isPublicRoute) return publicRoutes[location]
+	if (!isLogged && !isPrivateRoute && isPublicRoute) return publicRoutes[location]
+	if (!isLogged && !isPrivateRoute && !isPublicRoute) return NotFound
+}
+
+module.exports = { Router, Router2 }
